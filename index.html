@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyBot | Organizador Escolar</title>
+
+    <link rel="stylesheet" href="estilos.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- MENU LATERAL -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">S</div>
+            <div>
+                <h2>StudyBot</h2>
+                <small>Organizador escolar</small>
+            </div>
+        </div>
+
+        <p class="menu-title">MENÚ PRINCIPAL</p>
+
+        <nav>
+            <button class="nav-btn active" data-section="inicio">
+                ◈ <span>Inicio</span>
+            </button>
+
+            <button class="nav-btn" data-section="tareas">
+                ▤ <span>Mis tareas</span>
+            </button>
+
+            <button class="nav-btn" data-section="materias">
+                ▦ <span>Mis materias</span>
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="avatar">SB</div>
+            <div>
+                <strong>Mi espacio escolar</strong>
+                <small>StudyBot</small>
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main">
+
+        <header class="topbar">
+            <button class="menu-toggle" id="menuToggle">☰</button>
+
+            <div>
+                <h3 id="pageTitle">Inicio</h3>
+            </div>
+
+            <div class="top-label">✦ Mi organizador</div>
+        </header>
+
+        <div class="content">
+
+            <!-- SECCIÓN INICIO -->
+            <section id="inicio" class="section active">
+
+                <div class="welcome">
+
+                    <div>
+                        <span class="tag">BIENVENIDO A STUDYBOT</span>
+
+                        <h1>¡Organiza tu aprendizaje!</h1>
+
+                        <p>
+                            Administra tus tareas, materias y actividades
+                            en un solo lugar.
+                        </p>
+                    </div>
+
+                    <!-- ILUSTRACIÓN DECORATIVA DE ÚTILES ESCOLARES -->
+                    <div class="welcome-illustration"
+                         aria-label="Ilustración de útiles escolares"
+                         role="img">
+
+                        <div class="illustration-book book-back">📘</div>
+                        <div class="illustration-book book-front">📚</div>
+                        <div class="illustration-note">✓</div>
+                        <div class="illustration-pencil">✏️</div>
+
+                    </div>
+
+                </div>
+
+                <!-- ESTADÍSTICAS DE LAS TAREAS -->
+                <div class="stats">
+
+                    <div class="stat-card">
+                        <div class="stat-icon purple">▤</div>
+                        <p>Total de tareas</p>
+                        <h2 id="totalTasks">0</h2>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon blue">◷</div>
+                        <p>Pendientes</p>
+                        <h2 id="pendingTasks">0</h2>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon green">✓</div>
+                        <p>Completadas</p>
+                        <h2 id="completedTasks">0</h2>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon pink">▦</div>
+                        <p>Materias</p>
+                        <h2 id="totalSubjects">0</h2>
+                    </div>
+
+                </div>
+
+                <!-- ACTIVIDADES RECIENTES -->
+                <div class="panel">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <h2>Mis actividades</h2>
+                            <p>Resumen de tus tareas registradas.</p>
+                        </div>
+
+                        <button class="primary-btn"
+                                onclick="showSection('tareas')">
+                            + Nueva tarea
+                        </button>
+
+                    </div>
+
+                    <div id="recentTasks" class="recent-list"></div>
+
+                </div>
+
+                <div class="info-banner">
+                    <div class="banner-icon">💡</div>
+
+                    <div>
+                        <strong>¡Mantén todo organizado!</strong>
+
+                        <p>
+                            Registra tus actividades y administra
+                            tu tiempo de estudio.
+                        </p>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- SECCIÓN MIS TAREAS -->
+            <section id="tareas" class="section">
+
+                <div class="section-heading">
+                    <span class="tag">ADMINISTRACIÓN</span>
+
+                    <h1>Mis tareas</h1>
+
+                    <p>
+                        Agrega y administra tus actividades escolares.
+                    </p>
+                </div>
+
+                <!-- FORMULARIO PARA REGISTRAR TAREAS -->
+                <div class="panel">
+
+                    <h2>Registrar nueva tarea</h2>
+
+                    <p class="muted">
+                        Completa los siguientes datos.
+                    </p>
+
+                    <form id="taskForm">
+
+                        <div class="form-grid">
+
+                            <div class="field">
+                                <label for="taskName">
+                                    Nombre de la tarea
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="taskName"
+                                    placeholder="Ej. Investigación de informática"
+                                    required>
+                            </div>
+
+                            <div class="field">
+                                <label for="taskSubject">Materia</label>
+
+                                <select id="taskSubject" required></select>
+                            </div>
+
+                            <div class="field">
+                                <label for="taskDate">Fecha de entrega</label>
+
+                                <input type="date" id="taskDate">
+                            </div>
+
+                            <div class="field">
+                                <label for="taskPriority">Prioridad</label>
+
+                                <select id="taskPriority">
+                                    <option value="Normal">Normal</option>
+                                    <option value="Importante">Importante</option>
+                                    <option value="Urgente">Urgente</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="form-buttons">
+
+                            <button type="submit" class="primary-btn">
+                                + Guardar tarea
+                            </button>
+
+                            <button type="reset" class="secondary-btn">
+                                Limpiar campos
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <!-- TABLA DE TAREAS -->
+                <div class="panel">
+
+                    <div class="panel-heading">
+                        <div>
+                            <h2>Lista de tareas</h2>
+                            <p>Busca y administra tus registros.</p>
+                        </div>
+                    </div>
+
+                    <div class="task-tools">
+
+                        <input
+                            type="search"
+                            id="searchTask"
+                            class="search-input"
+                            placeholder="⌕ Buscar por nombre o materia...">
+
+                        <!-- BOTÓN PARA DEMOSTRAR EL FUNCIONAMIENTO DE LA PILA -->
+                        <button
+                            type="button"
+                            class="secondary-btn"
+                            id="undoTaskButton">
+
+                            ↶ Recuperar última tarea eliminada
+
+                        </button>
+
+                    </div>
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Tarea</th>
+                                    <th>Materia</th>
+                                    <th>Entrega</th>
+                                    <th>Prioridad</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="taskTable"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- SECCIÓN MIS MATERIAS -->
+            <section id="materias" class="section">
+
+                <div class="section-heading">
+
+                    <span class="tag">ORGANIZACIÓN</span>
+
+                    <h1>Mis materias</h1>
+
+                    <p>
+                        Administra las materias de tus actividades escolares.
+                    </p>
+
+                </div>
+
+                <div class="panel">
+
+                    <h2>Registrar materia</h2>
+
+                    <div class="inline-form">
+
+                        <input
+                            type="text"
+                            id="subjectName"
+                            placeholder="Nombre de la materia">
+
+                        <button
+                            class="primary-btn"
+                            onclick="addSubject()">
+
+                            + Agregar
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="panel">
+
+                    <h2>Materias registradas</h2>
+
+                    <p class="muted">
+                        Consulta y administra tus materias registradas.
+                    </p>
+
+                    <div id="subjectList" class="subject-grid"></div>
+
+                </div>
+
+            </section>
+
+            <footer>
+                StudyBot © 2026 | Administrador de tareas
+            </footer>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- MENSAJES DE CONFIRMACIÓN -->
+<div id="toast" class="toast"></div>
+
+<!-- CONEXIÓN CON JAVASCRIPT -->
+<script src="script.js"></script>
+
+</body>
+</html>
